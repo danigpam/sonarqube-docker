@@ -1,0 +1,28 @@
+version: '3'
+networks: 
+    ? redinha2
+services:
+    postgresql:
+        container_name: postgresql
+        image: docker.io/postgres:10
+        hostname: postgresql
+        ports:
+            - '5432:5432'
+        environment:
+            - POSTGRES_USER=sonar
+            - POSTGRES_PASSWORD=sonar
+            - POSTGRES_DATABASE=sonar
+        networks:
+            - redinha2
+    sonarqube:
+        container_name: sonarqube
+        image: sonarqube
+        hostname: sonarqube
+        ports:
+            - '9000:9000'
+        environment:
+            - SONARQUBE_DATA=/opt/sonarqube/data
+            - SONARQUBE_TEMP=/opt/sonarqube/temp
+        networks: 
+            - redinha2
+
